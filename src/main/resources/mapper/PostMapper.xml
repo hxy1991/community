@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.PostDao">
+
+
+	<select id="getUserPostCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_post where uid=#{uid}
+	</select>
+
+	<select id="getGroupPostCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_post where gid=#{gid}
+	</select>
+
+	<select id="getGroupPosts" resultType="Post">
+		select * from cm_post
+		where gid=#{gid} order by ${orderBy} DESC limit #{from}, #{pageSize}
+	</select>
+
+	<select id="getPostsByUid" resultType="Post">
+		select * from cm_post
+		where uid=#{uid} order by id desc limit #{from}, #{pageSize}
+	</select>
+
+	<select id="getFollowerGroupPostCount" resultType="java.lang.Integer">
+		select
+		count(*) from cm_post join cm_user_group
+		on cm_post.gid
+		=cm_user_group.gid
+		WHERE cm_user_group.uid=#{uid}
+	</select>
+
+	<select id="getFollowerGroupPost" resultType="Post">
+		select * from
+		cm_post join cm_user_group
+		on cm_post.gid =cm_user_group.gid where
+		cm_user_group.uid=#{uid}
+		order by cm_post.id desc limit #{from},
+		#{pageSize}
+	</select>
+
+	<select id="getFriendPostCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_post join cm_relationship
+		on cm_post.uid
+		=cm_relationship.followed
+		where cm_relationship.follow=#{uid}
+	</select>
+
+	<select id="getFriendPosts" resultType="Post">
+		select * from cm_post
+		join cm_relationship
+		on cm_post.uid =cm_relationship.followed
+		where
+		cm_relationship.follow=#{uid} order by cm_post.id desc limit
+		#{from},
+		#{pageSize}
+	</select>
+
+	<select id="getPostById" resultType="Post">
+		select * from cm_post where
+		id=#{id}
+	</select>
+
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="id"
+		parameterType="Post">
+		insert into cm_post (uid,gid,title,tags,content)
+		values(#{uid},#{gid},#{title},#{tags},#{content})
+	</insert>
+
+
+	<select id="searchPostCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_post where title LIKE "%"#{word}"%" OR content LIKE "%"#{word}"%"
+	</select>
+
+	<select id="searchPost" resultType="Post">
+		select * from cm_post where
+		title LIKE "%"#{word}"%" OR content LIKE "%"#{word}"%" order by id
+		desc limit #{from},
+		#{pageSize}
+	</select>
+
+	<select id="isMyPost" resultType="java.lang.Integer">
+		select id from cm_post where
+		uid=#{uid} and id=#{pid}
+	</select>
+
+	<delete id="deletePost">
+		delete FROM cm_post where id=#{id} and uid = #{uid}
+	</delete>
+
+	<update id="updateViewCount" parameterType="Post">
+		update cm_post set
+		viewCount=#{viewCount} where id=#{id}
+	</update>
+
+
+</mapper>

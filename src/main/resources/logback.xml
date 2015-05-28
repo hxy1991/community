@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+	<!-- sends logs to logback-beagle -->
+	<consolePlugin />
+	<!-- set the logging path -->
+	<property name="LOG_HOME" value="/data/app/whitetile/logs" />
+	<property name="CONSOLE_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level -- %class [%3line] -- %msg%n" />
+	<property name="MSG_PATTERN" value="%d{ISO8601} -- %msg%n" />
+	<property name="NORMAL_PATTERN" value="%d{ISO8601} -- %-60.60class [%3line] -- %msg%n" />
+	<property name="SERIOUS_PATTERN" value="%d{ISO8601} [%-16.16thread] %-5level -- %-60.60class [%3line] -- %msg%n" />
+	<timestamp key="byDay" datePattern="yyyyMMdd" />
+	<timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<withJansi>false</withJansi>
+		<encoder>
+			<pattern>${CONSOLE_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<!-- File Appender -->
+	<appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_HOME}/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/debug.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${SERIOUS_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	<appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_HOME}/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/info.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${NORMAL_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${LOG_HOME}/warn.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/warn.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${SERIOUS_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<file>${LOG_HOME}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/error.%d{yyyyMMdd}.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${SERIOUS_PATTERN}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- For debug , developers. end -->
+	<root level="INFO">
+	 	<appender-ref ref="STDOUT" />  
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="WARN" />
+		<appender-ref ref="ERROR" />
+	</root>
+</configuration>

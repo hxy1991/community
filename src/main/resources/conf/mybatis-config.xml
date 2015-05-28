@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+	
+	<!-- 命名空间 -->
+	<typeAliases>
+		<typeAlias alias="User" type="com.community.domain.User" />
+		<typeAlias alias="Comment" type="com.community.domain.Comment" />
+		<typeAlias alias="Group" type="com.community.domain.Group" />
+		<typeAlias alias="Message" type="com.community.domain.Message" />
+		<typeAlias alias="Post" type="com.community.domain.Post" />
+		<typeAlias alias="Relationship" type="com.community.domain.Relationship" />
+		<typeAlias alias="Resource" type="com.community.domain.Resource" />
+		<typeAlias alias="UserPostView" type="com.community.domain.UserPostView" />
+		<typeAlias alias="UserGroup" type="com.community.domain.UserGroup" />
+		<typeAlias alias="ResourceDownload" type="com.community.domain.ResourceDownload" />
+	</typeAliases>
+
+
+	<!-- 映射map -->
+	<mappers>
+	</mappers>
+
+
+</configuration>

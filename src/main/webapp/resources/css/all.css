@@ -1,0 +1,184 @@
+body {
+	font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI",
+		"Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
+	position: static;
+}
+
+body > .navbar .brand {
+	color: #777777;
+	float: left;
+}
+.tab-content {
+	overflow: visible;
+}
+
+#newPost .ke-container {
+	width: 618px !important;
+}
+#reply .ke-container {
+	width: 100% !important;
+}
+@media (min-width: 1200px) {
+	.bs-docs-sidenav {
+		width: 270px;
+	}
+	#newPost .ke-container {
+		width:88.2% !important;
+	}
+}
+@media (min-width: 768px) and (max-width: 979px) {
+	#newPost .ke-container {
+		width: 474px !important;
+	}
+}
+
+@media (max-width: 767px) {
+	#newPost .ke-container {
+		width:99.6% !important;
+	}
+}
+@media (max-width: 416px) {
+	#newPost .ke-container {
+		width:99.4% !important;
+	}
+}
+@media (max-width: 294px) {
+	#newPost .ke-container {
+		width:99.2% !important;
+	}
+}
+.tab-content{
+	min-height:200px;
+}
+textarea {
+	resize: none;
+	vertical-align: text-top;
+}
+
+.table th {
+	text-align: center;
+}
+
+.table td {
+	text-align: center;
+	vertical-align: middle;
+}
+
+hr {
+	border-top: 1px solid #CFCFCF;
+	margin: 10px;
+}
+
+.tenPadding {
+	padding: 10px;
+}
+
+.fiveBottomPadding {
+	padding-bottom: 5px;
+}
+
+.fiveBottomPadding {
+	padding-bottom: 5px;
+}
+
+.twentyFontSize {
+	font-size: 12px;
+}
+
+.centerTextAlign {
+	text-align: center;
+}
+
+.oneLeftBoder {
+	border-left: 1px solid #666;
+}
+
+.ellipsis {
+	white-space: nowrap; /*规定段落中的文本不进行换行：*/
+	text-overflow: ellipsis;
+	overflow: hidden;
+	height:20px;
+}
+/************************************************/
+.counts {
+	height: 25px;
+	font-size: 160%;
+	font-weight: normal;
+}
+
+.topicTitle {
+	padding: 10px 10px;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 20px;
+	text-align: left;
+}
+
+.lastComment {
+	padding-right: 20px;
+	line-height: 40px;
+}
+
+.groupMsg {
+	text-align: center;
+	border: 1px solid #CCC;
+	margin: 2px;
+}
+
+.oneSolidBorder {
+	border: 1px solid #CCC;
+}
+/* 头像 */
+.avatar {
+	width: 80px;
+	height: 80px;
+}
+
+.resourceList li {
+	float: left;
+	width: 260px;
+	_width: 270px; /*需要特别为IE6写CSS代码，带下划线的就只有IE6能认识*/
+	height: 24px;
+	margin: 0 10px 0 0;
+	padding: 0 0 0 10px;
+	background: url(../img/point_1.gif) no-repeat left center;
+	white-space: nowrap; /*规定段落中的文本不进行换行：*/
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+/*
+.affix-top {
+	position: fixed;
+}*/
+
+.homeUsername {
+	padding-left: 82px;
+	height: 36px;
+	line-height: 36px;
+	font-weight: bold;
+}
+#reply {
+	margin-top: 20px;
+}
+
+span.keyword {
+	color: red;
+	font-weight: bold;
+}
+/*用户图片的圆角*/
+.caption img,.media-object {
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-box-shadow: 1px 1px 3px #292929;
+	-moz-box-shadow: 1px 1px 3px #292929;
+	box-shadow: 1px 1px 3px #292929;
+}
+
+#newPost{
+	margin-top:20px;
+}
+
+#uploadFrom {
+	margin:0px;
+}

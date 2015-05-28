@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.GroupDao">
+
+
+	<select id="getGoupCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_group
+	</select>
+
+	<select id="getGroups" resultType="Group">
+		select * from cm_group limit
+		#{from}, #{pageSize}
+	</select>
+
+	<select id="listGroup" resultType="Group">
+		select * from cm_group limit
+		#{pageSize}
+	</select>
+
+	<select id="getGroupById" resultType="Group">
+		select * from cm_group
+		where id= #{gid}
+	</select>
+
+	<select id="getUserGroupCount" resultType="java.lang.Integer">
+		select count(id) from cm_user_group where uid=#{uid}
+	</select>
+	
+	<select id="getGoupsByUid" resultType="Group">
+		select * from cm_group
+		join cm_user_group
+		on cm_group.id =cm_user_group.gid where
+		cm_user_group.uid=#{uid} limit #{from},#{pageSize}
+	</select>
+	
+	<insert id="insertGroup" useGeneratedKeys="true" keyProperty="id"
+		parameterType="Group">
+		insert into cm_group (name,description,creator)
+		values(#{name},#{description},#{creator})
+	</insert>
+
+
+	<select id="searchGroupCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_group where name LIKE "%"#{word}"%"
+	</select>
+
+	<select id="searchGroup" resultType="Group">
+		select * from cm_group where
+		name LIKE "%"#{word}"%" order by id desc limit #{from},#{pageSize}
+	</select>
+
+	<select id="getTopPostCountGroups" resultType="Group">
+		SELECT * FROM
+		cm_group JOIN (SELECT gid, COUNT(*) AS postCount FROM cm_post GROUP BY
+		gid) cm_post
+		ON cm_group.id = cm_post.gid
+		ORDER BY postCount desc LIMIT
+		#{topCount}
+	</select>
+
+	<select id="getTopResourceCountGroups" resultType="Group">
+		SELECT * FROM
+		cm_group JOIN (SELECT gid, COUNT(*) AS resourceCount FROM
+		cm_resource
+		GROUP BY gid)cm_resource
+		ON cm_group.id = cm_resource.gid
+		ORDER BY
+		resourceCount desc LIMIT #{topCount}
+	</select>
+
+	<select id="getTopFollowerCountGroups" resultType="Group">
+		SELECT * FROM
+		cm_group JOIN (SELECT gid, COUNT(*) AS followerCount FROM
+		cm_user_group GROUP BY gid) cm_user_group
+		ON cm_group.id =
+		cm_user_group.gid
+		ORDER BY followerCount desc LIMIT #{topCount}
+	</select>
+
+</mapper>

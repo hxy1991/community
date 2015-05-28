@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.UserPostViewDao">
+
+
+	<insert id="createUserPostView" useGeneratedKeys="true"
+		keyProperty="id" parameterType="Relationship">
+		insert into cm_user_post_view (uid,pid) values(#{uid},#{pid})
+	</insert>
+
+	<select id="getUserPostViews" resultType="UserPostView">
+		select * from cm_user_post_view where uid=#{uid} order by id DESC limit #{from}, #{pageSize}
+	</select>
+</mapper>

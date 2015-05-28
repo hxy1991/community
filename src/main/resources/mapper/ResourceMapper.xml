@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.ResourceDao">
+
+
+	<insert id="insertResource" useGeneratedKeys="true" keyProperty="id"
+		parameterType="Resource">
+		insert into cm_resource
+		(name,size,uid,gid,description,downloadURL)
+		values(#{name},#{size},#{uid},#{gid},#{description},#{downloadURL})
+	</insert>
+
+	<select id="getGroupResourceCount" resultType="java.lang.Integer">
+		select count(*)
+		from cm_resource where gid=#{gid}
+	</select>
+
+	<select id="getGroupResources" resultType="Resource">
+		select * from
+		cm_resource where gid=#{gid} order by id desc limit #{from},
+		#{pageSize}
+	</select>
+
+	<select id="getResourceById" resultType="Resource">
+		select * from
+		cm_resource
+		where id=#{id}
+	</select>
+
+	<select id="getUserResourceCount" resultType="java.lang.Integer">
+		select count(*)
+		from cm_resource where uid=#{uid}
+	</select>
+
+	<delete id="deleteResource">
+		delete FROM cm_resource where id=#{id} and uid=#{uid}
+	</delete>
+
+	<select id="getResourcesByUid" resultType="Resource">
+		select * from
+		cm_resource where uid=#{uid} order by id desc limit #{from},
+		#{pageSize}
+	</select>
+
+</mapper>

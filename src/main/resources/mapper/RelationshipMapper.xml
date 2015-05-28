@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.RelationshipDao">
+
+
+	<select id="getFriendCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_relationship where follow=#{uid}
+	</select>
+
+	<select id="getFollowerCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_relationship where followed=#{uid}
+	</select>
+
+	<insert id="insertRelationship" useGeneratedKeys="true"
+		keyProperty="id" parameterType="Relationship">
+		insert into cm_relationship (follow,
+		followed) values(#{follow},#{followed})
+	</insert>
+
+	<delete id="deleteFriendship">
+		delete from cm_relationship where follow=#{follow}
+		and followed=#{followed}
+	</delete>
+
+	<select id="getFollowersByUid" resultType="Relationship">
+		select * FROM cm_relationship
+		where followed=#{uid} order by id DESC limit #{from}, #{pageSize}
+	</select>
+	
+	<select id="getRelationship" resultType="Relationship">
+		select * FROM cm_relationship where follow=#{follow} and followed=#{followed}
+	</select>
+	
+	
+	<select id="getFriendsByUid" resultType="Relationship">
+		select * FROM cm_relationship
+		where follow=#{uid} order by id DESC limit #{from}, #{pageSize}
+	</select>
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.UserGroupDao">
+
+	<select id="getFollowedGroupCountByUid" resultType="java.lang.Integer">
+		select
+		count(*) from cm_user_group where uid=#{uid}
+	</select>
+
+	<insert id="insertUserGroup" useGeneratedKeys="true"
+		keyProperty="id" parameterType="UserGroup">
+		insert into cm_user_group (uid,gid)
+		values(#{uid},#{gid})
+	</insert>
+
+	<select id="getGroupFollowerCount" resultType="java.lang.Integer">
+		select count(*)
+		from cm_user_group where gid=#{gid}
+	</select>
+
+	<select id="getGroupFollowers" resultType="UserGroup">
+		select * from
+		cm_user_group
+		where gid=#{gid} order by id DESC limit #{from},
+		#{pageSize}
+	</select>
+
+
+	<delete id="deleteUserGroup">
+		delete from cm_user_group where uid=#{uid} and
+		gid=#{gid}
+	</delete>
+
+	<select id="getUerGroupByUidAndGid" resultType="UserGroup">
+		select * from
+		cm_user_group where uid=#{uid} and gid=#{gid}
+	</select>
+
+</mapper>

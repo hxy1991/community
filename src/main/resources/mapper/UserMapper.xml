@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.community.dao.UserDao">
+
+
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id"
+		parameterType="User">
+		insert into
+		cm_user(email,password,nickname)
+		value
+		(#{email},#{password},#{nickname})
+	</insert>
+
+
+	<select id="getUserById" resultType="User">
+		SELECT
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user WHERE id=#{id}
+	</select>
+
+	<select id="getUserCount" resultType="java.lang.Integer">
+		SELECT count(id) FROM
+		cm_user
+	</select>
+
+	<select id="getUserByEmail" resultType="User">
+		SELECT
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user WHERE email=#{email}
+	</select>
+
+	<select id="getUserByNickname" resultType="User">
+		SELECT
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user WHERE nickname=#{nickname}
+	</select>
+
+	<select id="getUsers" resultType="User">
+		select
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user limit #{from},#{pageSize}
+	</select>
+
+
+	<select id="getTopPostCountUsers" resultType="User">
+		SELECT
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user JOIN (SELECT uid, COUNT(*) AS postCount FROM cm_post
+		GROUP BY uid) cm_post
+		ON cm_user.id = cm_post.uid ORDER BY postCount
+		DESC
+		LIMIT #{topCount}
+	</select>
+
+	<select id="getTopResourceCountUsers" resultType="User">
+		SELECT
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user JOIN (SELECT uid, COUNT(*) AS resourceCount FROM
+		cm_resource GROUP BY uid) cm_resource
+		ON cm_user.id = cm_resource.uid
+		ORDER BY resourceCount DESC LIMIT
+		#{topCount}
+	</select>
+
+	<select id="getTopFollowerCountUsers" resultType="User">
+		SELECT
+		id,email,password,nickname,sex,description,registered,status,avaterURI,enabled,last_login_time,login_time
+		FROM cm_user JOIN
+		(SELECT followed, COUNT( * ) AS followerCount FROM
+		cm_relationship GROUP BY
+		followed)cm_relationship
+		ON cm_user.id =
+		cm_relationship.followed
+		ORDER BY followerCount DESC LIMIT #{topCount}
+	</select>
+
+	<update id="updateUser" parameterType="User">
+		update cm_user set
+		password=#{password},nickname=#{nickname},sex=#{sex},
+		description=#{description},status=#{status},avaterURI=#{avaterURI},enabled=#{enabled},last_login_time=#{lastLoginTime},login_time=#{loginTime}
+		where id=#{id}
+	</update>
+
+
+	<select id="searchUserCount" resultType="java.lang.Integer">
+		select count(*) from
+		cm_user where nickname LIKE "%"#{word}"%"
+	</select>
+
+	<select id="searchUser" resultType="User">
+		select * from cm_user where
+		nickname LIKE "%"#{word}"%" order by id
+		desc limit #{from},	#{pageSize}
+	</select>
+</mapper>

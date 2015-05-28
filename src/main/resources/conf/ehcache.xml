@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+	<diskStore path="java.io.tmpdir" />
+
+	<defaultCache maxElementsInMemory="10000"
+		maxElementsOnDisk="100000" eternal="false" timeToIdleSeconds="120"
+		timeToLiveSeconds="120" overflowToDisk="true" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU" />
+
+	<cache name="comment" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="group" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="post" maxElementsInMemory="10000" maxElementsOnDisk="10000"
+		eternal="true" overflowToDisk="true" diskSpoolBufferSizeMB="50" />
+
+	<cache name="relationship" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="resourceDownload" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="resource" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="userGroup" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="userPostView" maxElementsInMemory="10000"
+		maxElementsOnDisk="10000" eternal="true" overflowToDisk="true"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="user" maxElementsInMemory="10000" maxElementsOnDisk="10000"
+		eternal="true" overflowToDisk="true" diskSpoolBufferSizeMB="50" />
+
+</ehcache>

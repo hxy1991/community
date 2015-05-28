@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>Community Common 1.1 functions library</description>
+	<display-name>Community Common functions</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>cn</short-name>
+	<uri>http://community.sinaapp.com/jsp/jstl/common</uri>
+	<function>
+		<description>friendlyTime</description>
+		<name>friendlyTime</name>
+		<function-class>com.community.web.Common</function-class>
+		<function-signature>java.lang.String friendlyTime(java.sql.Timestamp)</function-signature>
+		<example>
+		</example>
+	</function>
+	<function>
+		<description>getFloor</description>
+		<name>getFloor</name>
+		<function-class>com.community.web.Common</function-class>
+		<function-signature>java.lang.Integer getFloor(java.lang.Integer, java.lang.Integer)</function-signature>
+		<example>
+		</example>
+	</function>
+	<function>
+		<description>getPageHref</description>
+		<name>getPageHref</name>
+		<function-class>com.community.web.Common</function-class>
+		<function-signature>java.lang.String getPageHref(java.lang.String)</function-signature>
+		<example>
+		</example>
+	</function>
+	<function>
+		<description>getFileSizeStr</description>
+		<name>getFileSizeStr</name>
+		<function-class>com.community.web.Common</function-class>
+		<function-signature>java.lang.String getFileSizeStr(java.lang.Long)</function-signature>
+		<example>
+		</example>
+	</function>
+</taglib>
